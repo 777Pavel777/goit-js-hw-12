@@ -68,6 +68,13 @@ async function handleSearchImg(event) {
     }
 
     createMarkup(data.hits, galleryListElem);
+
+    if (Math.floor(data.totalHits / limit) === loadPageImg) {
+      loadingAfterImgEl.classList.remove('loader');
+      showErrorCustom('You have more 500 images.Please try later');
+      return;
+    }
+
     loaderElem.classList.remove('loader');
     loadMoreBtn.classList.remove('hidden');
 
@@ -97,6 +104,12 @@ async function addMoreImg() {
     const data = await getImg(loadPageImg, curentSearch, limit);
 
     createMarkup(data.hits, galleryListElem);
+
+    if (Math.floor(data.totalHits / limit) === loadPageImg) {
+      loadingAfterImgEl.classList.remove('loader');
+      showErrorCustom('You have more 500 images.Please try later');
+      return;
+    }
 
     loaderElem.classList.remove('loader');
     loadingAfterImgEl.classList.remove('loader');
