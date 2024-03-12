@@ -69,21 +69,14 @@ async function handleSearchImg(event) {
 
     createMarkup(data.hits, galleryListElem);
 
+    loaderElem.classList.remove('loader');
+    loadMoreBtn.classList.remove('hidden');
+
     if (Math.ceil(data.totalHits / limit) === loadPageImg) {
       loadingAfterImgEl.classList.remove('loader');
       loadMoreBtn.classList.add('hidden');
       showError("We're sorry, but you've reached the end of search results.");
       return;
-    }
-    loaderElem.classList.remove('loader');
-    loadMoreBtn.classList.remove('hidden');
-
-    if (data.totalHits < loadPageImg * limit) {
-      loadMoreBtn.classList.add('hidden');
-      return showError(
-        "We're sorry, but you've reached the end of search results.",
-        '#0071BD'
-      );
     }
 
     lightbox.refresh();
@@ -105,23 +98,15 @@ async function addMoreImg() {
 
     createMarkup(data.hits, galleryListElem);
 
+    loaderElem.classList.remove('loader');
+    loadingAfterImgEl.classList.remove('loader');
+    loadMoreBtn.classList.remove('hidden');
+
     if (Math.ceil(data.totalHits / limit) === loadPageImg) {
       loadingAfterImgEl.classList.remove('loader');
       loadMoreBtn.classList.add('hidden');
       showError("We're sorry, but you've reached the end of search results.");
       return;
-    }
-
-    loaderElem.classList.remove('loader');
-    loadingAfterImgEl.classList.remove('loader');
-    loadMoreBtn.classList.remove('hidden');
-
-    if (data.hits.length >= data.totalHits) {
-      loadMoreBtn.classList.add('hidden');
-      return showError(
-        "We're sorry, but you've reached the end of search results.",
-        '#0071BD'
-      );
     }
 
     window.scrollBy({
