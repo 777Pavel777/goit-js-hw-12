@@ -21,16 +21,3 @@ export async function getImg(page, query, limit) {
   });
   return data;
 }
-// return axios.get(searchLink).then(res => {
-//   if (res.status !== 200) {
-//     throw new Error(`Problem ${res.status}`);
-//   }
-//   return res.data;
-// });
-
-// return fetch(searchLink).then(res => {
-//   if (!res.ok) {
-//     throw new Error(`Problem ${res.status}`);
-//   }
-//   return res.json();
-// });

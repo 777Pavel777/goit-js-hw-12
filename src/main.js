@@ -69,15 +69,14 @@ async function handleSearchImg(event) {
 
     createMarkup(data.hits, galleryListElem);
 
-    loaderElem.classList.remove('loader');
-    loadMoreBtn.classList.remove('hidden');
-
-    if (Math.floor(data.totalHits / limit) === loadPageImg) {
+    if (Math.ceil(data.totalHits / limit) === loadPageImg) {
       loadingAfterImgEl.classList.remove('loader');
       loadMoreBtn.classList.add('hidden');
-      showError('There are no more pictures for this request');
+      showError("We're sorry, but you've reached the end of search results.");
       return;
     }
+    loaderElem.classList.remove('loader');
+    loadMoreBtn.classList.remove('hidden');
 
     if (data.totalHits < loadPageImg * limit) {
       loadMoreBtn.classList.add('hidden');
@@ -106,10 +105,10 @@ async function addMoreImg() {
 
     createMarkup(data.hits, galleryListElem);
 
-    if (Math.floor(data.totalHits / limit) === loadPageImg) {
+    if (Math.ceil(data.totalHits / limit) === loadPageImg) {
       loadingAfterImgEl.classList.remove('loader');
       loadMoreBtn.classList.add('hidden');
-      showError('There are no more pictures for this request');
+      showError("We're sorry, but you've reached the end of search results.");
       return;
     }
 
