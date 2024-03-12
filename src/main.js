@@ -69,14 +69,15 @@ async function handleSearchImg(event) {
 
     createMarkup(data.hits, galleryListElem);
 
-    if (Math.floor(data.totalHits / limit) === loadPageImg) {
-      loadingAfterImgEl.classList.remove('loader');
-      showErrorCustom('You have more 500 images.Please try later');
-      return;
-    }
-
     loaderElem.classList.remove('loader');
     loadMoreBtn.classList.remove('hidden');
+
+    if (Math.floor(data.totalHits / limit) === loadPageImg) {
+      loadingAfterImgEl.classList.remove('loader');
+      loadMoreBtn.classList.add('hidden');
+      showError('There are no more pictures for this request');
+      return;
+    }
 
     if (data.totalHits < loadPageImg * limit) {
       loadMoreBtn.classList.add('hidden');
@@ -107,6 +108,8 @@ async function addMoreImg() {
 
     if (Math.floor(data.totalHits / limit) === loadPageImg) {
       loadingAfterImgEl.classList.remove('loader');
+      loadMoreBtn.classList.add('hidden');
+      showError('There are no more pictures for this request');
       return;
     }
 
